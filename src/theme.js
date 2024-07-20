@@ -8,6 +8,7 @@ const theme = {
     appBar: '#24292e',
     appBarFg: '#fff',
     cardFg: '#fff',
+    danger: '#ab0000',
   },
   fontSizes: {
     caption: 12,
