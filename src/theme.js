@@ -4,6 +4,7 @@ const theme = {
     textSecondary: '#586069',
     primary: '#0366d6',
     primaryFg: '#fff',
+    border: '#efefef',
     appBar: '#24292e',
     appBarFg: '#fff',
     cardFg: '#fff',
