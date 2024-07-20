@@ -1,6 +1,7 @@
 import { View, StyleSheet, Pressable, Text } from 'react-native'
 import Constants from 'expo-constants'
 import theme from '../theme'
+import { Link } from 'react-router-native'
 
 const APP_BAR = {
   paddingHorizontal: 16,
@@ -26,16 +27,17 @@ const styles = StyleSheet.create({
 
 const AppBarTab = props => {
   return (
-    <Pressable>
+    <Link to={props.path}>
       <Text style={styles.tabText}>{props.text}</Text>
-    </Pressable>
+    </Link>
   )
 }
 
 const AppBar = () => {
   return (
     <View style={styles.container}>
-      <AppBarTab text="Repositories" />
+      <AppBarTab path="/" text="Repositories" />
+      <AppBarTab path="/signin" text="Sign in" />
     </View>
   )
 }
