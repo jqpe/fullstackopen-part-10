@@ -1,5 +1,5 @@
 import { View } from 'react-native'
-import SignInForm from './form'
+import SignInForm from './Form'
 
 const SignIn = () => {
   return (
