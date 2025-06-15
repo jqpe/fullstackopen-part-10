@@ -2,6 +2,9 @@ import { View, StyleSheet, ScrollView, Text } from 'react-native'
 import Constants from 'expo-constants'
 import theme from '../theme'
 import { Link } from 'react-router-native'
+import { useApolloClient, useQuery } from '@apollo/client'
+import { ME } from '../graphql/queries'
+import useAuthStorage from '../hooks/useAuthStorage'
 
 const APP_BAR = {
   paddingHorizontal: 16,
@@ -29,18 +32,33 @@ const styles = StyleSheet.create({
 
 const AppBarTab = props => {
   return (
-    <Link to={props.path}>
+    <Link to={props.path} onPress={props.onPress}>
       <Text style={styles.tabText}>{props.text}</Text>
     </Link>
   )
 }
 
 const AppBar = () => {
+  const me = useQuery(ME)
+  const authStorage = useAuthStorage()
+  const apolloClient = useApolloClient()
+
   return (
     <View style={styles.container}>
       <ScrollView horizontal contentContainerStyle={styles.scrollContainer}>
         <AppBarTab path="/" text="Repositories" />
-        <AppBarTab path="/signin" text="Sign in" />
+        {me.data.me ? (
+          <AppBarTab
+            path="#signout"
+            text="Sign out"
+            onPress={async () => {
+              await authStorage.removeAccessToken()
+              await apolloClient.resetStore()
+            }}
+          />
+        ) : (
+          <AppBarTab path="/signin" text="Sign in" />
+        )}
       </ScrollView>
     </View>
   )
