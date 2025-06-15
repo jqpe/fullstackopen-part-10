@@ -1,15 +1,23 @@
 import { View } from 'react-native'
-import SignInForm from './Form'
+import { useNavigate } from 'react-router-native'
 import { useSignIn } from '../../hooks/useSignIn'
+import SignInForm from './Form'
 
 const SignIn = () => {
-  const [signIn, res] = useSignIn()
-
-  console.log(res.data);
+  const navigate = useNavigate()
+  const [signIn] = useSignIn()
 
   return (
     <View>
-      <SignInForm onSubmit={signIn} />
+      <SignInForm
+        onSubmit={async formProps => {
+          const result = await signIn(formProps)
+
+          if (result.data?.authenticate.accessToken) {
+            navigate({ pathname: '/' })
+          }
+        }}
+      />
     </View>
   )
 }
