@@ -53,6 +53,7 @@ const SignInForm = ({ onSubmit }) => {
   return (
     <View style={styles.form}>
       <TextInput
+        autoCapitalize="none"
         style={[styles.input, username.error && styles.invalidInput]}
         placeholder="Username"
         value={formik.values.username}
@@ -61,6 +62,7 @@ const SignInForm = ({ onSubmit }) => {
       {username.error && <Text color="danger">{username.error}</Text>}
 
       <TextInput
+        autoCapitalize="none"
         style={[styles.input, password.error && styles.invalidInput]}
         secureTextEntry
         placeholder="Password"
